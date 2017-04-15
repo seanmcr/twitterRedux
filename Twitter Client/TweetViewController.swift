@@ -9,10 +9,31 @@
 import UIKit
 
 class TweetViewController: UIViewController {
-
+    private static let dateFormatter = DateFormatter()
+    
+    @IBOutlet weak var authorNameLabel: UILabel!
+    @IBOutlet weak var authorImageView: UIImageView!
+    @IBOutlet weak var authorHandleLabel: UILabel!
+    @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var createdAtLabel: UILabel!
+    
+    @IBOutlet weak var numberFavoritesLabel: UILabel!
+    @IBOutlet weak var numberTweetsLabel: UILabel!
+    
+    var tweet: Tweet? {
+        didSet{
+            if (self.isViewLoaded){
+                updateViewsWithCurrentTweet()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        TweetViewController.dateFormatter.dateStyle = .medium
+        TweetViewController.dateFormatter.timeStyle = .medium
+        updateViewsWithCurrentTweet()
         // Do any additional setup after loading the view.
     }
 
@@ -21,6 +42,17 @@ class TweetViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func updateViewsWithCurrentTweet(){
+        if let tweet = tweet {
+            authorNameLabel.text = tweet.author.name
+            authorHandleLabel.text = tweet.author.handle
+            tweetTextLabel.text = tweet.fullDescription
+            createdAtLabel.text = TweetViewController.dateFormatter.string(from: tweet.createdAtDate)
+            authorImageView.setImageWith(tweet.author.profileImageUrl)
+            numberTweetsLabel.text = "\(tweet.numberOfRetweets)"
+            numberFavoritesLabel.text = "\(tweet.numberOfFavorites)"
+        }
+    }
 
     /*
     // MARK: - Navigation

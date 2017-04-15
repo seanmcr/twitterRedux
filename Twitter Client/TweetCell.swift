@@ -9,20 +9,50 @@
 import UIKit
 
 class TweetCell: UITableViewCell {
+    private static var dateComponentsFormatter: DateComponentsFormatter?
+    
     @IBOutlet weak var profilePicImageView: UIImageView!
 
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var timeSincePostLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
     
-    var tweet: Tweet? {
+    var tweet: Tweet! {
         didSet{
+            let attributedString = NSMutableAttributedString(
+                string: "\(tweet.author!.name!) \(tweet.author.handle!)",
+                attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 15.0)])
+            let authorLength = tweet.author.name!.characters.count
+            attributedString.addAttributes(
+                [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16.0)],
+                range: NSRange(location: 0, length: authorLength))
+            attributedString.addAttributes(
+                [NSForegroundColorAttributeName : UIColor.lightGray],
+                range: NSRange(location: authorLength + 1, length: attributedString.length - authorLength - 1))
+            authorLabel.attributedText = attributedString
             
+            profilePicImageView.setImageWith(tweet.author.profileImageUrl)
+            timeSincePostLabel.text = TweetCell.formatDateSince(tweet.createdAtDate!)
+            tweetLabel.text = tweet.fullDescription
         }
+    }
+    
+    private static func formatDateSince(_ fromDate: Date!) -> String? {
+        if (dateComponentsFormatter == nil){
+            dateComponentsFormatter = DateComponentsFormatter()
+            dateComponentsFormatter!.zeroFormattingBehavior = .dropAll
+            dateComponentsFormatter!.allowedUnits = [.day, .hour, .minute]
+            dateComponentsFormatter!.maximumUnitCount = 2
+            dateComponentsFormatter!.unitsStyle = .abbreviated
+        }
+        return dateComponentsFormatter!.string(from: fromDate, to: Date())
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        profilePicImageView.layer.cornerRadius = 5
+        profilePicImageView.clipsToBounds = true
         // Initialization code
     }
 

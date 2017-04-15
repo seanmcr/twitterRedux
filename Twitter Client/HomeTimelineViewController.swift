@@ -15,13 +15,43 @@ class HomeTimelineViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshTweets), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+        refreshTweets()
+        refreshControl.beginRefreshing()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func onSignOut(_ sender: Any) {
+        User.current!.logout()
+    }
+    
+    @objc private func refreshTweets(){
+        TwitterClient.sharedInstance.getHomeTimelineTweets(completion: { (tweets) in
+            self.tweets = tweets
+            self.tableView.reloadData()
+            self.tableView.refreshControl!.endRefreshing()
+        }) { (error) in
+            //ARSLineProgress.showFailure()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.destination is TweetViewController){
+            let tweetViewController = segue.destination as! TweetViewController
+            tweetViewController.tweet = (sender as! TweetCell).tweet
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

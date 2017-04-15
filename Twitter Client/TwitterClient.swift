@@ -9,14 +9,16 @@
 import Foundation
 import BDBOAuth1Manager
 
+
 class TwitterClient : BDBOAuth1SessionManager {
     private static let baseUrl: URL! = URL(string: "https://api.twitter.com")
     private static let consumerKey: String = "X0lyGc1qHep8iI3alF1tGKp6z"
     private static let consumerSecret = "G7mfgq7DTxluiTR8gZ8r0ouuGjO5nVpX4LejqtaNDKrA9gVBMo"
     private static let baseAuthorizeUrlString = "https://api.twitter.com/oauth/authorize"
     private static let callBackUrl: URL! = URL(string: "twitterclient://oauth")
+    private static let acceesTokenKey: String! = "k_accessToken"
     
-    var accessToken: BDBOAuth1Credential?
+    static let userDidLogOutNotification = Notification.Name("userDidLogOut")
     
     static let sharedInstance: TwitterClient = {
         let instance = TwitterClient(baseURL: baseUrl, consumerKey: consumerKey, consumerSecret: consumerSecret)!
@@ -35,10 +37,12 @@ class TwitterClient : BDBOAuth1SessionManager {
     
     func login(withCredential credential: BDBOAuth1Credential!, completion: @escaping (_ user: User) -> Void) {
         self.fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: credential, success: { (accessToken) in
-            self.accessToken = accessToken
+            self.requestSerializer.saveAccessToken(accessToken)
+
             self.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task, response) in
                 let responseDictionary = response as? NSDictionary
                 let user = User(dictionary: responseDictionary)
+                User.current = user
                 completion(user)
             }, failure: { (task, error) in
                 print(error.localizedDescription)
@@ -47,9 +51,26 @@ class TwitterClient : BDBOAuth1SessionManager {
             print(error!.localizedDescription)
         }
     }
+
+    func logout(){
+        self.deauthorize()
+        User.current = nil
+        NotificationCenter.default.post(name: TwitterClient.userDidLogOutNotification, object: nil)
+    }
     
-    func getHomeTimelineTweets(completion: ([Tweet])-> Void){
-        self.get(<#T##URLString: String##String#>, parameters: <#T##Any?#>, progress: <#T##((Progress) -> Void)?##((Progress) -> Void)?##(Progress) -> Void#>, success: <#T##((URLSessionDataTask, Any?) -> Void)?##((URLSessionDataTask, Any?) -> Void)?##(URLSessionDataTask, Any?) -> Void#>, failure: <#T##((URLSessionDataTask?, Error) -> Void)?##((URLSessionDataTask?, Error) -> Void)?##(URLSessionDataTask?, Error) -> Void#>)
+    func getHomeTimelineTweets(completion: @escaping (_ tweets: [Tweet])-> Void, failure: @escaping (_ error: Error) -> Void){
+        
+        self.get("1.1/statuses/home_timeline.json", parameters: ["count" : 20], progress: nil, success: { (task, response) in
+            if let responseDictionaries = response as? [NSDictionary]{
+                var tweets: [Tweet] = []
+                for dictionary in responseDictionaries{
+                    tweets.append(Tweet(dictionary: dictionary))
+                }
+                completion(tweets)
+            }
+        }) { (task, error) in
+            failure(error)
+        }
     }
     
 }
