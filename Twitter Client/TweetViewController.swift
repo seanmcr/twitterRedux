@@ -53,7 +53,24 @@ class TweetViewController: UIViewController {
             numberFavoritesLabel.text = "\(tweet.numberOfFavorites)"
         }
     }
-
+    
+    @IBAction func onReplyButton(_ sender: Any) {
+        
+    }
+    
+    @IBAction func onRetweetButton(_ sender: Any) {
+        User.current!.retweet(tweet!, completion: { (updatedTweet) in
+            self.tweet = updatedTweet
+            self.updateViewsWithCurrentTweet()
+        }) { (error) in
+            print(error)
+        }
+    }
+    
+    @IBAction func onFavoriteButton(_ sender: Any) {
+    }
+    
+    
     /*
     // MARK: - Navigation
 

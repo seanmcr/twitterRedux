@@ -16,15 +16,24 @@ class Tweet: NSObject{
     var fullDescription: String!
     var numberOfRetweets: Int
     var numberOfFavorites: Int
+    var id: Int
+    var retweetedBy: User?
     
     var author: User!
 
-    init(dictionary: NSDictionary!){
+    init(dictionary: NSDictionary){
+        var dictionary = dictionary
+        let retweeted = dictionary["retweeted"] as! Bool
+        if let retweetDictionary = dictionary["retweeted_status"] as? NSDictionary {
+            retweetedBy = User(dictionary: dictionary["user"] as! NSDictionary)
+            dictionary = retweetDictionary
+        }
         createdAtDate = Tweet.parseDateCreated(dictionary["created_at"])
         fullDescription = dictionary["text"] as! String
         author = User(dictionary: dictionary["user"] as! NSDictionary)
         numberOfRetweets = dictionary["retweet_count"] as! Int
         numberOfFavorites = dictionary["favorite_count"] as! Int
+        id = dictionary["id"] as! Int
     }
     
     private class func parseDateCreated(_ dateCreated: Any?) -> Date {

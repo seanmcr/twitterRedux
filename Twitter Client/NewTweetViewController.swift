@@ -16,6 +16,8 @@ class NewTweetViewController: UIViewController {
     
     @IBOutlet weak var authorHandleLabel: UILabel!
     
+    var isInReplyTo: Tweet?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

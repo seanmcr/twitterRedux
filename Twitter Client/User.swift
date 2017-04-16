@@ -49,6 +49,10 @@ class User: NSObject{
         jsonDictionary = dictionary
     }
     
+    func retweet(_ tweet:Tweet, completion: @escaping (Tweet) -> Void, failure: @escaping (Error) -> Void){
+        TwitterClient.sharedInstance.retweet(tweet, completion: completion, failure: failure)
+    }
+    
     func logout(){
         TwitterClient.sharedInstance.logout()
     }
