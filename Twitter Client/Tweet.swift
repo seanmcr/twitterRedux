@@ -16,6 +16,7 @@ class Tweet: NSObject{
     var fullDescription: String!
     var numberOfRetweets: Int
     var numberOfFavorites: Int
+    var favorited: Bool
     var id: Int
     var retweetedBy: User?
     
@@ -33,6 +34,7 @@ class Tweet: NSObject{
         author = User(dictionary: dictionary["user"] as! NSDictionary)
         numberOfRetweets = dictionary["retweet_count"] as! Int
         numberOfFavorites = dictionary["favorite_count"] as! Int
+        favorited = dictionary["favorited"] as! Bool
         id = dictionary["id"] as! Int
     }
     

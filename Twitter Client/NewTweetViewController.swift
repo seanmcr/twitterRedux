@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ARSLineProgress
 
 class NewTweetViewController: UIViewController {
 
@@ -16,7 +17,15 @@ class NewTweetViewController: UIViewController {
     
     @IBOutlet weak var authorHandleLabel: UILabel!
     
-    var isInReplyTo: Tweet?
+    @IBOutlet weak var tweetTextField: UITextField!
+    
+    var isInReplyTo: Tweet? {
+        didSet {
+            if isInReplyTo != nil {
+                self.navigationItem.title = "Reply"
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +51,24 @@ class NewTweetViewController: UIViewController {
     }
     
     @IBAction func onTweetButton(_ sender: Any) {
+        if let tweetText = tweetTextField.text {
+            ARSLineProgress.show()
+            if let isInReplyTo = isInReplyTo {
+                User.current!.replyTo(isInReplyTo, text: tweetText, completion: { (tweetResponse) in
+                    ARSLineProgress.showSuccess()
+                    self.dismiss(animated: true, completion: nil)
+                }, failure: { (error) in
+                    ARSLineProgress.showFail()
+                })
+            } else {
+                User.current!.tweet(tweetText, completion: { (tweetResponse) in
+                    ARSLineProgress.showSuccess()
+                    self.dismiss(animated: true, completion: nil)
+                }, failure: { (error) in
+                    ARSLineProgress.showFail()
+                })
+            }
+        }
     }
     /*
     // MARK: - Navigation

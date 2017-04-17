@@ -57,5 +57,17 @@ class User: NSObject{
         TwitterClient.sharedInstance.logout()
     }
 
+    func tweet(_ text:String, completion: @escaping (Tweet) -> Void, failure: @escaping (Error) -> Void){
+        TwitterClient.sharedInstance.tweet(text, completion: completion, failure: failure)
+    }
+    
+    func replyTo(_ tweet:Tweet, text: String, completion: @escaping (Tweet) -> Void, failure: @escaping (Error) -> Void){
+        TwitterClient.sharedInstance.replyTo(tweet, text: text, completion: completion, failure: failure)
+    }
+
+    func favorite(_ tweet:Tweet, completion: @escaping (Tweet) -> Void, failure: @escaping (Error) -> Void){
+        TwitterClient.sharedInstance.favorite(tweet, completion: completion, failure: failure)
+    }
+
     
 }

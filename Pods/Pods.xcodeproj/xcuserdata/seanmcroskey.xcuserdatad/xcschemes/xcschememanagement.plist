@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ARSLineProgress.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>BDBOAuth1Manager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,7 +27,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>63ABE68C50F95FF244AD6EE609ADC4C1</key>
+		<key>14876E8917EFFF790E519A59FF893DE6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -33,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>DD08B071644C635261E151819F7F6FA8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ED12E65A8773B275E891AC8116536624</key>
 		<dict>
 			<key>primary</key>
 			<true/>

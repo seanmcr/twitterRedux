@@ -80,5 +80,31 @@ class TwitterClient : BDBOAuth1SessionManager {
             failure(error)
         }
     }
-        
+    
+    func tweet(_ text:String, completion: @escaping (Tweet) -> Void, failure: @escaping (Error) -> Void){
+        self.requestSerializer.setQueryStringSerializationWith(.defaultStyle)
+        self.post("1.1/statuses/update.json", parameters: ["status" : text], progress: nil, success: { (task, response) in
+            completion(Tweet(dictionary: response as! NSDictionary))
+        }) { (task, error) in
+            failure(error)
+        }
+    }
+    
+    func replyTo(_ tweet:Tweet, text: String, completion: @escaping (Tweet) -> Void, failure: @escaping (Error) -> Void){
+        let replyText = "\(tweet.author.handle!) \(text)"
+        self.post("1.1/statuses/update.json", parameters: ["status" : replyText, "in_reply_to_status_id" : tweet.id], progress: nil, success: { (task, response) in
+            completion(Tweet(dictionary: response as! NSDictionary))
+        }) { (task, error) in
+            failure(error)
+        }
+    }
+
+    func favorite(_ tweet:Tweet,completion: @escaping (Tweet) -> Void, failure: @escaping (Error) -> Void){
+        self.post("1.1/favorites/create.json", parameters: ["id" : tweet.id], progress: nil, success: { (task, response) in
+            completion(Tweet(dictionary: response as! NSDictionary))
+        }) { (task, error) in
+            failure(error)
+        }
+    }
+
 }

@@ -16,7 +16,9 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var timeSincePostLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
+    @IBOutlet weak var retweeterHandleLabel: UILabel!
     
+    @IBOutlet weak var retweetedByView: UIView!
     var tweet: Tweet! {
         didSet{
             let attributedString = NSMutableAttributedString(
@@ -34,6 +36,13 @@ class TweetCell: UITableViewCell {
             profilePicImageView.setImageWith(tweet.author.profileImageUrl)
             timeSincePostLabel.text = TweetCell.formatDateSince(tweet.createdAtDate!)
             tweetLabel.text = tweet.fullDescription
+            
+            if (tweet.retweetedBy != nil){
+                retweetedByView.isHidden = false
+                retweeterHandleLabel.text = "\(tweet.retweetedBy!.handle!) retweeted"
+            } else {
+                retweetedByView.isHidden = true
+            }
         }
     }
     

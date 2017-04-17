@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ARSLineProgress
 
 class TweetViewController: UIViewController {
     private static let dateFormatter = DateFormatter()
@@ -19,6 +20,8 @@ class TweetViewController: UIViewController {
     
     @IBOutlet weak var numberFavoritesLabel: UILabel!
     @IBOutlet weak var numberTweetsLabel: UILabel!
+    
+    @IBOutlet weak var favoritedButton: UIButton!
     
     var tweet: Tweet? {
         didSet{
@@ -42,6 +45,13 @@ class TweetViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let navController = segue.destination as? UINavigationController {
+            let replyTweetController = navController.topViewController as! NewTweetViewController
+            replyTweetController.isInReplyTo = self.tweet
+        }
+    }
+    
     func updateViewsWithCurrentTweet(){
         if let tweet = tweet {
             authorNameLabel.text = tweet.author.name
@@ -51,6 +61,7 @@ class TweetViewController: UIViewController {
             authorImageView.setImageWith(tweet.author.profileImageUrl)
             numberTweetsLabel.text = "\(tweet.numberOfRetweets)"
             numberFavoritesLabel.text = "\(tweet.numberOfFavorites)"
+            favoritedButton.imageView?.image = tweet.favorited ? #imageLiteral(resourceName: "twitter_favorite_on") : #imageLiteral(resourceName: "twitter_favorite")
         }
     }
     
@@ -63,11 +74,17 @@ class TweetViewController: UIViewController {
             self.tweet = updatedTweet
             self.updateViewsWithCurrentTweet()
         }) { (error) in
-            print(error)
+            ARSLineProgress.showFail()
         }
     }
     
     @IBAction func onFavoriteButton(_ sender: Any) {
+        User.current!.favorite(tweet!, completion: { (updatedTweet) in
+            self.tweet = updatedTweet
+            self.updateViewsWithCurrentTweet()
+        }) { (error) in
+            ARSLineProgress.showFail()
+        }
     }
     
     
