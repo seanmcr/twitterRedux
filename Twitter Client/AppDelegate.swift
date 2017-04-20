@@ -33,9 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func navigateToHomeTimelineIfLoggedIn(){
         if (TwitterClient.sharedInstance.isAuthorized){
             if (User.current != nil){
-                let navigationController = self.mainStoryboard.instantiateViewController(withIdentifier: "TweetsNavigationController") as! UINavigationController
-                navigationController.popToRootViewController(animated: false)
-                self.window!.rootViewController = navigationController
+                let hamburgerMenuController = self.mainStoryboard.instantiateViewController(withIdentifier: "HamburgerMenuViewController")
+                self.window!.rootViewController = hamburgerMenuController
             }
         }
     }
