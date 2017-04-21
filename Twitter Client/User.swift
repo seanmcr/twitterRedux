@@ -14,6 +14,9 @@ class User: NSObject{
     var profileImageUrl: URL!
     var name: String!
     var handle: String!
+    var numberOfTweets: Int!
+    var numberOfFriends: Int!
+    var numberOfFollowers: Int!
     
     var jsonDictionary: NSDictionary!
     
@@ -46,6 +49,9 @@ class User: NSObject{
         profileImageUrl = URL(string: dictionary["profile_image_url_https"] as! String)
         name = dictionary["name"] as? String
         handle = "@\((dictionary["screen_name"] as! String))"
+        numberOfTweets = dictionary["statuses_count"] as? Int
+        numberOfFriends = dictionary["friends_count"] as? Int
+        numberOfFollowers = dictionary["followers_count"] as? Int
         jsonDictionary = dictionary
     }
     

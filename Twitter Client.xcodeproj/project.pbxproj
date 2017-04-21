@@ -14,6 +14,8 @@
 		AB532B561EA1C8D1007EF880 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB532B541EA1C8D1007EF880 /* LaunchScreen.storyboard */; };
 		ABC666E51EA87163004D7118 /* HamburgerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC666E41EA87163004D7118 /* HamburgerMenuViewController.swift */; };
 		ABC666E71EA8751B004D7118 /* HamburgerMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC666E61EA8751B004D7118 /* HamburgerMenuCell.swift */; };
+		ABDD61461EA9EB26007C49CD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDD61451EA9EB26007C49CD /* ProfileViewController.swift */; };
+		ABDD61481EA9EB9D007C49CD /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDD61471EA9EB9D007C49CD /* ProfileCell.swift */; };
 		ABE3A8BB1EA1CA37007C7413 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE3A8BA1EA1CA37007C7413 /* LoginViewController.swift */; };
 		ABE3A8BE1EA1D251007C7413 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE3A8BD1EA1D251007C7413 /* TwitterClient.swift */; };
 		ABE3A8C01EA1E2AA007C7413 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE3A8BF1EA1E2AA007C7413 /* User.swift */; };
@@ -34,6 +36,8 @@
 		AB532B571EA1C8D1007EF880 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABC666E41EA87163004D7118 /* HamburgerMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerMenuViewController.swift; sourceTree = "<group>"; };
 		ABC666E61EA8751B004D7118 /* HamburgerMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerMenuCell.swift; sourceTree = "<group>"; };
+		ABDD61451EA9EB26007C49CD /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		ABDD61471EA9EB9D007C49CD /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		ABE3A8BA1EA1CA37007C7413 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ABE3A8BD1EA1D251007C7413 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
 		ABE3A8BF1EA1E2AA007C7413 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -108,6 +112,7 @@
 				ABE3A8C31EA1E7B3007C7413 /* TweetViewController.swift */,
 				ABE3A8CB1EA2AA22007C7413 /* NewTweetViewController.swift */,
 				ABC666E41EA87163004D7118 /* HamburgerMenuViewController.swift */,
+				ABDD61451EA9EB26007C49CD /* ProfileViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 			children = (
 				ABE3A8C61EA1EFE3007C7413 /* TweetCell.swift */,
 				ABC666E61EA8751B004D7118 /* HamburgerMenuCell.swift */,
+				ABDD61471EA9EB9D007C49CD /* ProfileCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -271,12 +277,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABDD61481EA9EB9D007C49CD /* ProfileCell.swift in Sources */,
 				ABC666E71EA8751B004D7118 /* HamburgerMenuCell.swift in Sources */,
 				ABE3A8C01EA1E2AA007C7413 /* User.swift in Sources */,
 				ABE3A8C71EA1EFE3007C7413 /* TweetCell.swift in Sources */,
 				ABE3A8BB1EA1CA37007C7413 /* LoginViewController.swift in Sources */,
 				ABC666E51EA87163004D7118 /* HamburgerMenuViewController.swift in Sources */,
 				ABE3A8C41EA1E7B3007C7413 /* TweetViewController.swift in Sources */,
+				ABDD61461EA9EB26007C49CD /* ProfileViewController.swift in Sources */,
 				ABE3A8BE1EA1D251007C7413 /* TwitterClient.swift in Sources */,
 				AB532B4C1EA1C8D1007EF880 /* AppDelegate.swift in Sources */,
 				ABE3A8C21EA1E77D007C7413 /* HomeTimelineViewController.swift in Sources */,
