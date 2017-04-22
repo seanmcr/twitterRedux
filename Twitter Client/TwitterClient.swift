@@ -72,6 +72,25 @@ class TwitterClient : BDBOAuth1SessionManager {
             failure(error)
         }
     }
+
+    func getTimelineTweets(user: User, withIdLessThan maxId: Int?, completion: @escaping (_ tweets: [Tweet])-> Void, failure: @escaping (_ error: Error) -> Void){
+        var params = ["user_id" : user.id, "count" : 20]
+        if maxId != nil {
+            params["max_id"] = maxId!
+        }
+        self.get("1.1/statuses/user_timeline.json", parameters: params, progress: nil, success: { (task, response) in
+            if let responseDictionaries = response as? [NSDictionary]{
+                var tweets: [Tweet] = []
+                for dictionary in responseDictionaries{
+                    tweets.append(Tweet(dictionary: dictionary))
+                }
+                completion(tweets)
+            }
+        }) { (task, error) in
+            failure(error)
+        }
+    }
+    
     
     func retweet(_ tweet:Tweet, completion: @escaping (Tweet) -> Void, failure: @escaping (Error) -> Void){
         self.post("1.1/statuses/retweet/\(tweet.id).json", parameters: nil, progress: nil, success: { (task, response) in

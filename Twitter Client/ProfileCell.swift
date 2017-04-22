@@ -23,9 +23,9 @@ class ProfileCell: UITableViewCell {
             userProfileImageView.setImageWith(user.profileImageUrl)
             nameLabel.text = user.name
             handleLabel.text = user.handle
-            numberTweetsLabel.text = "\(user.numberOfTweets!)"
-            numberFollowingLabel.text = "\(user.numberOfFriends!)"
-            numberFollowersLabel.text = "\(user.numberOfFollowers!)"
+            numberTweetsLabel.text = "\(user.numberOfTweets)"
+            numberFollowingLabel.text = "\(user.numberOfFriends)"
+            numberFollowersLabel.text = "\(user.numberOfFollowers)"
         }
     }
     

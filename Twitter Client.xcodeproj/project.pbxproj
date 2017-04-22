@@ -16,6 +16,7 @@
 		ABC666E71EA8751B004D7118 /* HamburgerMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC666E61EA8751B004D7118 /* HamburgerMenuCell.swift */; };
 		ABDD61461EA9EB26007C49CD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDD61451EA9EB26007C49CD /* ProfileViewController.swift */; };
 		ABDD61481EA9EB9D007C49CD /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDD61471EA9EB9D007C49CD /* ProfileCell.swift */; };
+		ABDD614A1EAAEBDA007C49CD /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABDD61491EAAEBDA007C49CD /* TweetCell.xib */; };
 		ABE3A8BB1EA1CA37007C7413 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE3A8BA1EA1CA37007C7413 /* LoginViewController.swift */; };
 		ABE3A8BE1EA1D251007C7413 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE3A8BD1EA1D251007C7413 /* TwitterClient.swift */; };
 		ABE3A8C01EA1E2AA007C7413 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE3A8BF1EA1E2AA007C7413 /* User.swift */; };
@@ -38,6 +39,7 @@
 		ABC666E61EA8751B004D7118 /* HamburgerMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HamburgerMenuCell.swift; sourceTree = "<group>"; };
 		ABDD61451EA9EB26007C49CD /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		ABDD61471EA9EB9D007C49CD /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		ABDD61491EAAEBDA007C49CD /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
 		ABE3A8BA1EA1CA37007C7413 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ABE3A8BD1EA1D251007C7413 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
 		ABE3A8BF1EA1E2AA007C7413 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				ABE3A8C61EA1EFE3007C7413 /* TweetCell.swift */,
 				ABC666E61EA8751B004D7118 /* HamburgerMenuCell.swift */,
 				ABDD61471EA9EB9D007C49CD /* ProfileCell.swift */,
+				ABDD61491EAAEBDA007C49CD /* TweetCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				AB532B561EA1C8D1007EF880 /* LaunchScreen.storyboard in Resources */,
 				AB532B531EA1C8D1007EF880 /* Assets.xcassets in Resources */,
 				AB532B511EA1C8D1007EF880 /* Main.storyboard in Resources */,
+				ABDD614A1EAAEBDA007C49CD /* TweetCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

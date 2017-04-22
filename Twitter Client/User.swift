@@ -14,9 +14,10 @@ class User: NSObject{
     var profileImageUrl: URL!
     var name: String!
     var handle: String!
-    var numberOfTweets: Int!
-    var numberOfFriends: Int!
-    var numberOfFollowers: Int!
+    var numberOfTweets: Int
+    var numberOfFriends: Int
+    var numberOfFollowers: Int
+    var id: Int
     
     var jsonDictionary: NSDictionary!
     
@@ -47,11 +48,12 @@ class User: NSObject{
     
     init(dictionary: NSDictionary!){
         profileImageUrl = URL(string: dictionary["profile_image_url_https"] as! String)
+        id = dictionary["id"] as! Int
         name = dictionary["name"] as? String
         handle = "@\((dictionary["screen_name"] as! String))"
-        numberOfTweets = dictionary["statuses_count"] as? Int
-        numberOfFriends = dictionary["friends_count"] as? Int
-        numberOfFollowers = dictionary["followers_count"] as? Int
+        numberOfTweets = dictionary["statuses_count"] as! Int
+        numberOfFriends = dictionary["friends_count"] as! Int
+        numberOfFollowers = dictionary["followers_count"] as! Int
         jsonDictionary = dictionary
     }
     
@@ -74,6 +76,15 @@ class User: NSObject{
     func favorite(_ tweet:Tweet, completion: @escaping (Tweet) -> Void, failure: @escaping (Error) -> Void){
         TwitterClient.sharedInstance.favorite(tweet, completion: completion, failure: failure)
     }
+
+    func getTimelineTweets(completion: @escaping ([Tweet]) -> Void, failure: @escaping (Error) -> Void){
+        TwitterClient.sharedInstance.getTimelineTweets(user: self, withIdLessThan: nil, completion: completion, failure: failure)
+    }
+    
+    func getTimelineTweets(withIdLessThan id: Int, completion: @escaping ([Tweet]) -> Void, failure: @escaping (Error) -> Void){
+        TwitterClient.sharedInstance.getTimelineTweets(user: self, withIdLessThan: id, completion: completion, failure: failure)
+    }
+    
 
     
 }
