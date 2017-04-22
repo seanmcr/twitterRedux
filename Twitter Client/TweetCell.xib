@@ -23,17 +23,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="498" height="169.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndu-z9-FdC">
-                                <rect key="frame" x="0.0" y="0.0" width="498" height="18"/>
+                                <rect key="frame" x="0.0" y="0.0" width="498" height="26"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter_retweet" translatesAutoresizingMaskIntoConstraints="NO" id="ocG-Qq-SLk">
-                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                        <rect key="frame" x="16" y="8" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="aZN-EF-FJC"/>
                                             <constraint firstAttribute="height" constant="20" id="kMJ-yk-DRw"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@seanTweetTweet1 retweeted" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwQ-5S-x12">
-                                        <rect key="frame" x="28" y="2" width="183" height="16"/>
+                                        <rect key="frame" x="44" y="10" width="183" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -42,14 +42,14 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="uwQ-5S-x12" firstAttribute="centerY" secondItem="ocG-Qq-SLk" secondAttribute="centerY" id="2EP-UN-uy2"/>
-                                    <constraint firstItem="ocG-Qq-SLk" firstAttribute="top" secondItem="ndu-z9-FdC" secondAttribute="top" id="Raf-XX-Pfw"/>
+                                    <constraint firstItem="ocG-Qq-SLk" firstAttribute="top" secondItem="ndu-z9-FdC" secondAttribute="top" constant="8" id="Raf-XX-Pfw"/>
                                     <constraint firstItem="uwQ-5S-x12" firstAttribute="leading" secondItem="ocG-Qq-SLk" secondAttribute="trailing" constant="8" id="dYK-t9-0ah"/>
-                                    <constraint firstItem="ocG-Qq-SLk" firstAttribute="leading" secondItem="ndu-z9-FdC" secondAttribute="leading" id="k1m-VE-qZy"/>
+                                    <constraint firstItem="ocG-Qq-SLk" firstAttribute="leading" secondItem="ndu-z9-FdC" secondAttribute="leading" constant="16" id="k1m-VE-qZy"/>
                                     <constraint firstAttribute="bottom" secondItem="ocG-Qq-SLk" secondAttribute="bottom" constant="-2" id="ptA-qY-nN6"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbn-r7-LyZ">
-                                <rect key="frame" x="0.0" y="18" width="498" height="151.5"/>
+                                <rect key="frame" x="0.0" y="26" width="498" height="143.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BYY-4K-SSm">
                                         <rect key="frame" x="4" y="4" width="50" height="50"/>
@@ -87,21 +87,21 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter_reply" translatesAutoresizingMaskIntoConstraints="NO" id="y5L-ye-J6s">
-                                        <rect key="frame" x="62" y="115.5" width="20" height="20"/>
+                                        <rect key="frame" x="62" y="107.5" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="dAF-Y4-VQO"/>
                                             <constraint firstAttribute="width" constant="20" id="dnB-UR-k5e"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter_retweet" translatesAutoresizingMaskIntoConstraints="NO" id="6IX-BS-AQD">
-                                        <rect key="frame" x="132" y="115.5" width="20" height="20"/>
+                                        <rect key="frame" x="132" y="107.5" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="SbW-KI-kbn"/>
                                             <constraint firstAttribute="width" constant="20" id="klA-U5-sSA"/>
                                         </constraints>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter_favorite" translatesAutoresizingMaskIntoConstraints="NO" id="H6j-Wg-IAd">
-                                        <rect key="frame" x="202" y="115.5" width="20" height="20"/>
+                                        <rect key="frame" x="202" y="107.5" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="3Dm-wa-8Tk"/>
                                             <constraint firstAttribute="width" constant="20" id="HRc-Ir-iZ8"/>

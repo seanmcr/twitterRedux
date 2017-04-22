@@ -12,6 +12,7 @@ import ARSLineProgress
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bgCloudImageView: UIImageView!
     var tweets: [Tweet] = []
     
     override func viewDidLoad() {
@@ -35,6 +36,17 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let verticalOffset = scrollView.contentOffset.y
+        if (verticalOffset < 0){
+            let totalOffset = max(verticalOffset, -30)
+            let scale = 1.0 + (-totalOffset / 100.0)
+            bgCloudImageView.transform = CGAffineTransform(scaleX: scale, y: scale).translatedBy(x: 0, y: -totalOffset)
+        } else {
+            bgCloudImageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
     }
     
     @IBAction func didTapSignOut(_ sender: Any) {
@@ -83,6 +95,18 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        if (indexPath.row > 0){
+            performSegue(withIdentifier: "TweetSegue", sender: tableView.cellForRow(at: indexPath))
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let tweetViewController = segue.destination as? TweetViewController {
+            tweetViewController.tweet = (sender as! TweetCell).tweet
+        }
+    }
     /*
     // MARK: - Navigation
 

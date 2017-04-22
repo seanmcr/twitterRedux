@@ -62,7 +62,6 @@ class TweetCell: UITableViewCell {
         
         profilePicImageView.layer.cornerRadius = 5
         profilePicImageView.clipsToBounds = true
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
