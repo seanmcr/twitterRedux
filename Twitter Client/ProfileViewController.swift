@@ -13,24 +13,36 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bgCloudImageView: UIImageView!
+    var blurEffect: UIBlurEffect!
+    var effectView: UIVisualEffectView!
     var tweets: [Tweet] = []
+    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if (self.user == nil){
+            self.user = User.current
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         let tweetCellNib = UINib(nibName: "TweetCell", bundle: nil)
         tableView.register(tweetCellNib, forCellReuseIdentifier: "TweetCell")
+        
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshTimelineTweets), for:.valueChanged)
         tableView.refreshControl = refreshControl
         refreshControl.beginRefreshing()
         refreshTimelineTweets()
 
-        // Do any additional setup after loading the view.
+        blurEffect = UIBlurEffect(style: .light)
+        effectView = UIVisualEffectView(effect: blurEffect)
+        effectView.frame = bgCloudImageView.bounds
+        effectView.alpha = 0;
+        bgCloudImageView.addSubview(effectView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,9 +55,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         if (verticalOffset < 0){
             let totalOffset = max(verticalOffset, -30)
             let scale = 1.0 + (-totalOffset / 100.0)
+            effectView?.alpha = -totalOffset / 30.0
             bgCloudImageView.transform = CGAffineTransform(scaleX: scale, y: scale).translatedBy(x: 0, y: -totalOffset)
         } else {
             bgCloudImageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            effectView?.alpha = 1
         }
     }
     
@@ -54,7 +68,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @objc private func refreshTimelineTweets(){
-        User.current?.getTimelineTweets(completion: { (tweets) in
+        user.getTimelineTweets(completion: { (tweets) in
             self.tweets = tweets
             self.tableView.reloadData()
             self.tableView.refreshControl!.endRefreshing()
@@ -66,7 +80,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     private func getNextTimelineTweets(){
         if (tweets.count > 0){
             let maxId = tweets.max(by: {$0.id > $1.id})!.id
-            User.current?.getTimelineTweets(withIdLessThan: maxId, completion: { (tweets) in
+            user.getTimelineTweets(withIdLessThan: maxId, completion: { (tweets) in
                 self.tweets.append(contentsOf: tweets)
                 self.tableView.reloadData()
                 self.tableView.refreshControl!.endRefreshing()
@@ -83,7 +97,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell") as! ProfileCell
-            cell.user = User.current
+            cell.user = user
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell") as! TweetCell

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol NavigateToProfileHandler {
+    func navigateToProfile(forUser user: User)
+}
+
 class TweetCell: UITableViewCell {
     private static var dateComponentsFormatter: DateComponentsFormatter?
     
@@ -17,8 +21,10 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var timeSincePostLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
     @IBOutlet weak var retweeterHandleLabel: UILabel!
-    
     @IBOutlet weak var retweetedByView: UIView!
+    
+    var navigateToProfileHandler: NavigateToProfileHandler!
+    
     var tweet: Tweet! {
         didSet{
             let attributedString = NSMutableAttributedString(
@@ -62,8 +68,17 @@ class TweetCell: UITableViewCell {
         
         profilePicImageView.layer.cornerRadius = 5
         profilePicImageView.clipsToBounds = true
-    }
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapProfileImage))
+        profilePicImageView.addGestureRecognizer(tapRecognizer)
+}
 
+    @IBAction func didTapProfileImage(_ sender: Any) {
+        if let navHandler = navigateToProfileHandler {
+            navHandler.navigateToProfile(forUser: tweet.author!)
+        }
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="498" height="170"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1zB-Ki-DcU" id="VfJ-0e-OP1">
-                <rect key="frame" x="0.0" y="0.0" width="498" height="170"/>
+                <rect key="frame" x="0.0" y="0.0" width="498" height="169.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kbL-W4-KnX">
@@ -51,8 +51,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbn-r7-LyZ">
                                 <rect key="frame" x="0.0" y="26" width="498" height="143.5"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BYY-4K-SSm">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BYY-4K-SSm">
                                         <rect key="frame" x="4" y="4" width="50" height="50"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="V46-W2-Bmf"/>
                                             <constraint firstAttribute="height" constant="50" id="gmS-CZ-scs"/>

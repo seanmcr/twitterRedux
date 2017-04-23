@@ -58,9 +58,12 @@ class TwitterClient : BDBOAuth1SessionManager {
         NotificationCenter.default.post(name: TwitterClient.userDidLogOutNotification, object: nil)
     }
     
-    func getHomeTimelineTweets(completion: @escaping (_ tweets: [Tweet])-> Void, failure: @escaping (_ error: Error) -> Void){
-        
-        self.get("1.1/statuses/home_timeline.json", parameters: ["count" : 20], progress: nil, success: { (task, response) in
+    func getHomeTimelineTweets(withIdLessThan maxId: Int?, completion: @escaping (_ tweets: [Tweet])-> Void, failure: @escaping (_ error: Error) -> Void){
+        var params = ["count" : 20]
+        if maxId != nil {
+            params["max_id"] = maxId! - 1
+        }
+        self.get("1.1/statuses/home_timeline.json", parameters: params, progress: nil, success: { (task, response) in
             if let responseDictionaries = response as? [NSDictionary]{
                 var tweets: [Tweet] = []
                 for dictionary in responseDictionaries{
@@ -76,9 +79,27 @@ class TwitterClient : BDBOAuth1SessionManager {
     func getTimelineTweets(user: User, withIdLessThan maxId: Int?, completion: @escaping (_ tweets: [Tweet])-> Void, failure: @escaping (_ error: Error) -> Void){
         var params = ["user_id" : user.id, "count" : 20]
         if maxId != nil {
-            params["max_id"] = maxId!
+            params["max_id"] = maxId! - 1
         }
         self.get("1.1/statuses/user_timeline.json", parameters: params, progress: nil, success: { (task, response) in
+            if let responseDictionaries = response as? [NSDictionary]{
+                var tweets: [Tweet] = []
+                for dictionary in responseDictionaries{
+                    tweets.append(Tweet(dictionary: dictionary))
+                }
+                completion(tweets)
+            }
+        }) { (task, error) in
+            failure(error)
+        }
+    }
+ 
+    func getMentionTweets(withIdLessThan maxId: Int?, completion: @escaping (_ tweets: [Tweet])-> Void, failure: @escaping (_ error: Error) -> Void){
+        var params = ["count" : 20]
+        if maxId != nil {
+            params["max_id"] = maxId! - 1
+        }
+        self.get("1.1/statuses/mentions_timeline.json", parameters: params, progress: nil, success: { (task, response) in
             if let responseDictionaries = response as? [NSDictionary]{
                 var tweets: [Tweet] = []
                 for dictionary in responseDictionaries{

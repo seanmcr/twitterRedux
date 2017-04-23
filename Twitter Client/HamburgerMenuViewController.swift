@@ -36,9 +36,11 @@ class HamburgerMenuViewController: UIViewController, UITableViewDelegate, UITabl
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let tweetsNavController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
         let profileViewController = storyboard.instantiateViewController(withIdentifier: "ProfileNavigationController")
+        let mentionsNavController = storyboard.instantiateViewController(withIdentifier: "MentionsTimelineNavigationController")
         viewControllers = [
             ("Profile", profileViewController),
-            ("Home", tweetsNavController)]
+            ("Home", tweetsNavController),
+            ("Mentions", mentionsNavController)]
         
         activeViewController = viewControllers[0].viewController
     }
