@@ -83,7 +83,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UXp-6d-tpH" id="1MS-Tg-c4q">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu item" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rve-xU-1iJ">
@@ -169,14 +169,26 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-clouds" translatesAutoresizingMaskIntoConstraints="NO" id="GVt-sK-5Ng">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                     </imageView>
+                                    <visualEffectView opaque="NO" alpha="0.59999999999999998" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="OL5-CD-OiP">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Tzb-pC-avz">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                        <blurEffect style="light"/>
+                                    </visualEffectView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="GVt-sK-5Ng" firstAttribute="leading" secondItem="kyQ-du-p9N" secondAttribute="leading" id="2k8-fO-bXH"/>
+                                    <constraint firstAttribute="bottom" secondItem="OL5-CD-OiP" secondAttribute="bottom" id="9Ke-9R-CmL"/>
+                                    <constraint firstItem="OL5-CD-OiP" firstAttribute="leading" secondItem="kyQ-du-p9N" secondAttribute="leading" id="Dad-C1-0Gi"/>
                                     <constraint firstAttribute="height" constant="60" id="EU3-61-47W"/>
                                     <constraint firstAttribute="bottom" secondItem="GVt-sK-5Ng" secondAttribute="bottom" id="NGu-QS-0cg"/>
                                     <constraint firstAttribute="trailing" secondItem="GVt-sK-5Ng" secondAttribute="trailing" id="TfR-kH-iRd"/>
+                                    <constraint firstAttribute="trailing" secondItem="OL5-CD-OiP" secondAttribute="trailing" id="Tj8-1k-aXj"/>
                                     <constraint firstItem="GVt-sK-5Ng" firstAttribute="top" secondItem="kyQ-du-p9N" secondAttribute="top" id="Ulx-EO-TfE"/>
+                                    <constraint firstItem="OL5-CD-OiP" firstAttribute="top" secondItem="kyQ-du-p9N" secondAttribute="top" id="whO-aS-Nqm"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="192" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uhu-Cy-cU5">
@@ -317,6 +329,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bgCloudImageView" destination="GVt-sK-5Ng" id="PQq-Oa-41p"/>
+                        <outlet property="blurEffectView" destination="OL5-CD-OiP" id="XPI-yw-RgE"/>
                         <outlet property="tableView" destination="uhu-Cy-cU5" id="b5W-Sv-T8f"/>
                         <segue destination="cst-p5-ctP" kind="show" identifier="TweetSegue" id="zTv-Bw-ZUb"/>
                     </connections>

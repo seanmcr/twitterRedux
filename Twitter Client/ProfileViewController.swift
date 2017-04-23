@@ -13,8 +13,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bgCloudImageView: UIImageView!
-    var blurEffect: UIBlurEffect!
-    var effectView: UIVisualEffectView!
+    @IBOutlet weak var blurEffectView: UIVisualEffectView!
     var tweets: [Tweet] = []
     var user: User!
     
@@ -38,11 +37,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         refreshControl.beginRefreshing()
         refreshTimelineTweets()
 
-        blurEffect = UIBlurEffect(style: .light)
-        effectView = UIVisualEffectView(effect: blurEffect)
-        effectView.frame = bgCloudImageView.bounds
-        effectView.alpha = 0;
-        bgCloudImageView.addSubview(effectView)
+        blurEffectView.alpha = 0
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,11 +50,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         if (verticalOffset < 0){
             let totalOffset = max(verticalOffset, -30)
             let scale = 1.0 + (-totalOffset / 100.0)
-            effectView?.alpha = -totalOffset / 30.0
-            bgCloudImageView.transform = CGAffineTransform(scaleX: scale, y: scale).translatedBy(x: 0, y: -totalOffset)
+            blurEffectView?.alpha = -totalOffset / 30.0 * 0.3
+            let transform = CGAffineTransform(scaleX: scale, y: scale).translatedBy(x: 0, y: -totalOffset)
+            bgCloudImageView.transform = transform
+            blurEffectView.transform = transform
         } else {
-            bgCloudImageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            effectView?.alpha = 1
+            bgCloudImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            blurEffectView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            blurEffectView.alpha = 0
         }
     }
     
