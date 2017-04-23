@@ -1,6 +1,4 @@
-# Project 3 - *Twitter*
-
-**Twitter** is a basic twitter app to read and compose tweets from the [Twitter API](https://apps.twitter.com/).
+# Project 4 - *Twitter Redux*
 
 Time spent: **15** hours spent in total
 
@@ -8,44 +6,52 @@ Time spent: **15** hours spent in total
 
 The following **required** functionality is completed:
 
-- [X] User can sign in using OAuth login flow.
-- [X] User can view last 20 tweets from their home timeline.
-- [X] The current signed in user will be persisted across restarts.
-- [X] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp.  In other words, design the custom cell with the proper Auto Layout settings.  You will also need to augment the model classes.
-- [X] User can pull to refresh.
-- [X] User can compose a new tweet by tapping on a compose button.
-- [X] User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
+- [X] Hamburger menu
+   - [X] Dragging anywhere in the view should reveal the menu.
+   - [X] The menu should include links to your profile, the home timeline, and the mentions view.
+   - [X] The menu can look similar to the example or feel free to take liberty with the UI.
+- [X] Profile page
+   - [X] Contains the user header view
+   - [X] Contains a section with the users basic stats: # tweets, # following, # followers
+- [X] Home Timeline
+   - [X] Tapping on a user image should bring up that user's profile page
 
 The following **optional** features are implemented:
 
-- [ ] When composing, you should have a countdown in the upper right for the tweet limit.
-- [ ] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
-- [X] Retweeting and favoriting should increment the retweet and favorite count.
-- [ ] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
-- [X] Replies should be prefixed with the username and the reply_id should be set when posting the tweet,
-- [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
+- [ ] Profile Page
+   - [ ] Implement the paging view for the user description.
+   - [ ] As the paging view moves, increase the opacity of the background screen. See the actual Twitter app for this effect
+   - [X] Pulling down the profile page should blur and resize the header image.
+- [ ] Account switching
+   - [ ] Long press on tab bar to bring up Account view with animation
+   - [ ] Tap account to switch to
+   - [ ] Include a plus button to Add an Account
+   - [ ] Swipe to delete an account
+
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [X] Infinite scrolling for all tweet timelines
+- [X] Re-used custom XIB for the tweet UITableViewCell to ensure consistency across all tweet timeline views
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. I'm curious how other people chose how to split methods between the TwitterClient class and model classes like User and Tweet.  For instance, I duplicated a lot of method signatures from TwitterClient to the User model, so calls to User.tweet() would just forward to the TwitterClient API
-2. What networking debugging tools and workflows did people find useful?  I don't feel like I had a good one.
+  1. Curious how folks implemented the image blur effect on the background/clouds image on the profile page
+  2. 
+
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-![Twitter client walkthrough](http://i.imgur.com/nBdKLH9.gif)
-[Twitter client walkthrough](http://i.imgur.com/nBdKLH9.gif)
+![Twitter Redux walkthrough](http://i.imgur.com/ykj80ho.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-I don't feel like I had a good workflow for debugging network requests, and I couldn't figure out why special characters in some tweets resulted in failures in the API.  I tried percent-escaping the param string, but then it actually tweeted the escaped string :/
+- I had difficulty getting the image blur to work the way that I wanted it to when pulling down on the UITableView in the profile view.  For one, I tried adding it programmatically and couldn't get the bounds to show up correctly (maybe I also needed to add programmatic layout constraints to make sure it always aligned with the background image view?).  Eventually I added it on the Storyboard and that resolved the issue.  Also the default UIBlurEffect doesn't seem to offer much customization (wanted to reduce the blur radius), and I wasn't sure whether plugging into the scollViewerDidScroll override was better than attaching a pan gesture recognizer and handling the 'animation' there.
+- It took me a long time to figure out why the back button wasn't appearing when I pushed a new viewcontroller onto the navigation stack.  Eventually I think I figured it out...I needed to either remove the existing left bar button item, or set the leftItemsSupplementBackButton property to true.  Is that the correct approach?
 
 ## License
 
